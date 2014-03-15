@@ -5,7 +5,12 @@
 <body>
 Usage:
 <div id='usage'>
-    &gt; curl -X POST -d @yourfile.txt http://curl-paste.org
+    &gt; curl -X POST -d @yourfile.txt http://<span id='hostname'></span>
 </div>
+<script>
+    var host = window.location.host;
+    document.getElementById('hostname').innerHTML = host;
+    document.title = host;
+</script>
 </body>
 </html>
