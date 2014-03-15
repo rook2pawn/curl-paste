@@ -12,7 +12,9 @@ var server = http.createServer();
 server.on('request',function(req,res) {
     if (req.method == 'GET') {
         if ((req.url.indexOf('/f') === 0) && (req.url.indexOf('/favicon') !== 0)) {
-            res.write(store.get(req.url));
+            var data = store.get(req.url);
+            if (data !== undefined)
+                res.write(store.get(req.url));
             res.end();
         } else {
             ecstatic(path.join(__dirname, '/web'))(req,res)
