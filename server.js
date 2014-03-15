@@ -8,6 +8,9 @@ var argv = require('optimist')
     .argv;
 var ecstatic = require('ecstatic');
 
+var stats = {
+uploads: 0
+};
 var server = http.createServer();
 server.on('request',function(req,res) {
     if (req.method == 'GET') {
@@ -42,10 +45,12 @@ server.on('request',function(req,res) {
                 res.end('\n');
                 req.connection.destroy();
             } else {
-                console.log("BODY IS " );
-                console.log(body);
                 var id = store.write(body)
-                res.write('http://curl-paste.com/f'+id);
+                stats.uploads++;
+                if (stats.uploads % 100 === 0) {
+                    console.log("Usage report: " + stats.uploads + ' uses as of ' + new Date()); 
+                }
+                res.write('http://curl-paste.org/f'+id);
                 res.end('\n');
             }
         });
