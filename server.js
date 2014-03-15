@@ -1,15 +1,20 @@
 var http = require('http');
 var path = require('path');
-var store = require('./store');
+var store = require('./lib/store');
 var argv = require('optimist')
     .usage('Webserver\nUsage : $0')
     .demand('p')
     .describe('p','port')
+    .demand('h')
+    .describe('h','hostname i.e. http://<hostname>/f8adfj')
     .argv;
 var ecstatic = require('ecstatic');
 
+var GLOBAL = {
+    duration: 1000*60
+};
 var stats = {
-uploads: 0
+    uploads: 0
 };
 var server = http.createServer();
 server.on('request',function(req,res) {
@@ -17,8 +22,8 @@ server.on('request',function(req,res) {
         if ((req.url.indexOf('/f') === 0) && (req.url.indexOf('/favicon') !== 0)) {
             var data = store.get(req.url);
             if (data !== undefined)
-                res.write(store.get(req.url));
-            res.end();
+                res.write(data.body);
+            res.end('\n');
         } else {
             ecstatic(path.join(__dirname, '/web'))(req,res)
         }
@@ -50,10 +55,13 @@ server.on('request',function(req,res) {
                 if (stats.uploads % 100 === 0) {
                     console.log("Usage report: " + stats.uploads + ' uses as of ' + new Date()); 
                 }
-                res.write('http://curl-paste.org/f'+id);
+                res.write('http://'+argv.h+'/f'+id);
                 res.end('\n');
             }
         });
     }
 });
 server.listen(argv.p);
+setInterval(function() {
+    store.setData(store.clean(store.getData(),new Date().getTime(),GLOBAL.duration));
+},2000);

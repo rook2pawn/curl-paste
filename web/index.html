@@ -1,11 +1,23 @@
 <html>
 <head>
 <title>CURL-PASTE.ORG</title>
+<style>
+    div#usage {
+        padding:1em;
+    }
+    div#results {
+        padding:1em;
+    }
+</style>
 </head>
 <body>
 Usage:
 <div id='usage'>
     &gt; curl -X POST -d @yourfile.txt http://<span id='hostname'></span>
+</div>
+<div id='results'>
+    Returns a URL that you can share. 
+    <br>URL is valid for 1 hour.
 </div>
 <script>
     var host = window.location.host;
