@@ -11,7 +11,8 @@ var argv = require('optimist')
 var ecstatic = require('ecstatic');
 
 var GLOBAL = {
-    duration: 1000*60
+    duration: 1000*60,
+    checkfrequency: 1000*30
 };
 var stats = {
     uploads: 0
@@ -64,4 +65,4 @@ server.on('request',function(req,res) {
 server.listen(argv.p);
 setInterval(function() {
     store.setData(store.clean(store.getData(),new Date().getTime(),GLOBAL.duration));
-},2000);
+},GLOBAL.checkfrequency);
