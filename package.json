@@ -1,0 +1,27 @@
+{
+  "name": "curl-paste",
+  "version": "0.0.0",
+  "description": "Curl-paste.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rook2pawn/curl-paste.git"
+  },
+  "keywords": [
+    "curl",
+    "POST"
+  ],
+  "author": "David Wee <rook2pawn@gmail.com> (http://rook2pawn.com)",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/rook2pawn/curl-paste/issues"
+  },
+  "homepage": "https://github.com/rook2pawn/curl-paste",
+  "dependencies": {
+    "ecstatic": "~0.4.13",
+    "optimist": "~0.6.1"
+  }
+}
