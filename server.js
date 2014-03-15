@@ -11,7 +11,7 @@ var ecstatic = require('ecstatic');
 var server = http.createServer();
 server.on('request',function(req,res) {
     if (req.method == 'GET') {
-        if (req.url.indexOf('/f') === 0) {
+        if ((req.url.indexOf('/f') === 0) && (req.url.indexOf('/favicon') !== 0)) {
             res.write(store.get(req.url));
             res.end();
         } else {
