@@ -11,7 +11,7 @@ var argv = require('optimist')
 var ecstatic = require('ecstatic');
 
 var GLOBAL = {
-    duration: 1000*60*60,
+    duration: 1000*60*60*168,
     checkfrequency: 1000*30
 };
 var stats = {
