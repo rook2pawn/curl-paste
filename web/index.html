@@ -29,6 +29,10 @@
     Usage:
     <div id='usage'>
         &gt; curl -X POST -d @yourfile.txt http://<span id='hostname'></span>
+        <br>
+        or
+        <br>
+        &gt; wget -q -O- --post-file yourfile.txt http://<span id='hostname2'></span> 
     </div>
     <div id='results'>
         Returns a URL that you can share. 
@@ -41,6 +45,7 @@
 <script>
     var host = window.location.host;
     document.getElementById('hostname').innerHTML = host;
+    document.getElementById('hostname2').innerHTML = host;
     document.title = host;
 </script>
 </body>
