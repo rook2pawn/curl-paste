@@ -1,52 +1,58 @@
 <html>
 <head>
-<title>CURL-PASTE.ORG</title>
-<style>
-    div#main {
-        margin:0 auto;
-        width:60%;
-    }
-    div#usage {
-        padding:1em;
-    }
-    div#results {
-        padding:1em;
-    }
-    div#github a:visited {
-        color:#4183c4;
-    }
-    div#github a:hover {
-        text-decoration:underline;
-    }
-    div#github a {
-        color:#4183c4;
-        text-decoration:none;
-    }
-</style>
+    <title>CURL-PASTE.ORG</title>
+    <style>
+        div#main {
+            margin:0 auto;
+            width:60%;
+            padding:2em;
+            background-color:white;
+        }
+        div#wrapper {
+            background-color:#F5CEA4;
+        }
+        div#usage {
+            padding:1em;
+        }
+        div#results {
+            padding:1em;
+        }
+        div#github a:visited {
+            color:#4183c4;
+        }
+        div#github a:hover {
+            text-decoration:underline;
+        }
+        div#github a {
+            color:#4183c4;
+            text-decoration:none;
+        }
+        body {
+            background: linear-gradient(to bottom, #e4f5fc 0%,#bfe8f9 50%,#9fd8ef 100%);
+            font-family: 'Ubuntu Mono', sans-serif;
+        }
+    </style>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
 </head>
 <body>
+<div id='wrapper'>
 <div id='main'>
     Usage:
     <div id='usage'>
-        &gt; curl -X POST -d @yourfile.txt http://<span id='hostname'></span>
+        &gt; curl -X POST -d @yourfile.txt http://<span class='hostname'></span>
         <br>
         or
         <br>
-        &gt; wget -q -O- --post-file yourfile.txt http://<span id='hostname2'></span> 
+        &gt; wget -q -O- --post-file yourfile.txt http://<span class='hostname'></span> 
     </div>
     <div id='results'>
         Returns a URL that you can share. 
         <br>URL is valid for 7 days.
     </div>
     <div id='github'>
-        <a href='http://github.com/rook2pawn/curl-paste'>curl-paste @ github</a>
+        <a href="http://github.com/rook2pawn/curl-paste">curl-paste @ github</a>
     </div>
 </div>
-<script>
-    var host = window.location.host;
-    document.getElementById('hostname').innerHTML = host;
-    document.getElementById('hostname2').innerHTML = host;
-    document.title = host;
-</script>
+</div>
 </body>
 </html>

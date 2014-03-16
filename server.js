@@ -1,12 +1,11 @@
 var http = require('http');
 var path = require('path');
+var hyperstream = require('hyperstream');
 var store = require('./lib/store');
 var argv = require('optimist')
     .usage('Webserver\nUsage : $0')
     .demand('p')
     .describe('p','port')
-    .demand('h')
-    .describe('h','hostname i.e. http://<hostname>/f8adfj')
     .argv;
 var ecstatic = require('ecstatic');
 
@@ -26,7 +25,12 @@ server.on('request',function(req,res) {
                 res.write(data.body);
             res.end('\n');
         } else {
-            ecstatic(path.join(__dirname, '/web'))(req,res)
+            var hostname = req.headers.host
+            var hs = hyperstream({
+                'html title' : hostname,
+                'span.hostname' : hostname
+            });
+            ecstatic({dir:path.join(__dirname, '/web'),passthrough:hs})(req,res)
         }
     } else if (req.method == 'POST') {
         req.setEncoding('utf8')
@@ -56,7 +60,8 @@ server.on('request',function(req,res) {
                 if (stats.uploads % 100 === 0) {
                     console.log("Usage report: " + stats.uploads + ' uses as of ' + new Date()); 
                 }
-                res.write('http://'+argv.h+'/f'+id);
+                var hostname = req.headers.host
+                res.write('http://'+hostname+'/f'+id);
                 res.end('\n');
             }
         });
