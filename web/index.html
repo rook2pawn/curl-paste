@@ -11,6 +11,29 @@
         div#wrapper {
             background-color:#F5CEA4;
             background: linear-gradient(to bottom, #f5cea4 0%, #7f6e55 100%);
+            position:relative;
+        }
+        div#w_bl {
+            position:absolute;
+            width: 0px;
+            height: 0px;
+            bottom:0; 
+            left:0;
+            background-color:transparent;
+            border-style: solid;
+            border-width: 30px 0 0 30px;
+            border-color: transparent transparent transparent #C0E8F9;
+        }
+        div#w_tr {
+            position:absolute;
+            top:0;
+            right:0;
+            background-color:transparent;
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: 0 30px 30px 0;
+            border-color: transparent #e4f5fc transparent transparent;
         }
         div#usage {
             padding:1em;
@@ -37,6 +60,11 @@
 </head>
 <body>
 <div id='wrapper'>
+<div id='w_bl'>
+</div>
+<div id='w_tr'>
+</div>
+
 <div id='main'>
     Usage:
     <div id='usage'>
