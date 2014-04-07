@@ -1,5 +1,6 @@
 var http = require('http');
 var path = require('path');
+var concat = require('concat-stream');
 var hyperstream = require('hyperstream');
 var store = require('./lib/store');
 var argv = require('optimist')
@@ -34,20 +35,7 @@ server.on('request',function(req,res) {
         }
     } else if (req.method == 'POST') {
         req.setEncoding('utf8')
-        var body = '';
-        req.on('data',function(c) {
-            body = body.concat(c);
-            // 1e5 === 1 * Math.pow(10, 5) === 1 * 100000 ~~~ 100k
-            if (body.length > 1e5) { 
-                // FLOOD ATTACK OR FAULTY CLIENT, NUKE REQUEST
-                console.log("Flood attack or faulty client, nuking request");
-                res.write('File size exceeded 100k.');
-                res.end('\n');
-                req.connection.destroy();
-            }
-        });
-        req.on('end',function(c) {
-            // 1e5 === 1 * Math.pow(10, 5) === 1 * 100000 ~~~ 100k
+        req.pipe(concat(function(body) {
             if (body.length > 1e5) { 
                 // FLOOD ATTACK OR FAULTY CLIENT, NUKE REQUEST
                 console.log("Flood attack or faulty client, nuking request");
@@ -64,7 +52,7 @@ server.on('request',function(req,res) {
                 res.write('http://'+hostname+'/f'+id);
                 res.end('\n');
             }
-        });
+        }));
     }
 });
 server.listen(argv.p);
