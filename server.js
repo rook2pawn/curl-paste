@@ -2,7 +2,11 @@ var http = require('http');
 var path = require('path');
 var concat = require('concat-stream');
 var hyperstream = require('hyperstream');
+var request = require('request');
+var vu = require('valid-url');
+var qs = require('querystring');
 var store = require('./lib/store');
+var handlebody = require('./lib/handlebody')(store);
 var argv = require('optimist')
     .usage('Webserver\nUsage : $0')
     .demand('p')
@@ -14,11 +18,9 @@ var GLOBAL = {
     duration: 1000*60*60*168,
     checkfrequency: 1000*30
 };
-var stats = {
-    uploads: 0
-};
 var server = http.createServer();
 server.on('request',function(req,res) {
+	console.log("REQ:",req.url,req.method);
     if (req.method == 'GET') {
         if ((req.url.indexOf('/f') === 0) && (req.url.indexOf('/favicon') !== 0)) {
             var data = store.get(req.url);
@@ -33,26 +35,23 @@ server.on('request',function(req,res) {
             });
             ecstatic({dir:path.join(__dirname, '/web'),passthrough:hs})(req,res)
         }
-    } else if (req.method == 'POST') {
+    } else if ((req.method == 'POST') && (req.url == '/')) {
         req.setEncoding('utf8')
         req.pipe(concat(function(body) {
-            if (body.length > 1e5) { 
-                // FLOOD ATTACK OR FAULTY CLIENT, NUKE REQUEST
-                console.log("Flood attack or faulty client, nuking request");
-                res.write('File size exceeded 100k.');
-                res.end('\n');
-                req.connection.destroy();
-            } else {
-                var id = store.write(body)
-                stats.uploads++;
-                if (stats.uploads % 100 === 0) {
-                    console.log("Usage report: " + stats.uploads + ' uses as of ' + new Date()); 
-                }
-                var hostname = req.headers.host
-                res.write('http://'+hostname+'/f'+id);
-                res.end('\n');
-            }
+            handlebody(req,res,body);
         }));
+    } else if ((req.method == 'POST') && (req.url == '/pasteurl')) {
+        req.setEncoding('utf8')
+        req.pipe(concat(function(body) {
+		var obj=qs.parse(body);
+		if (vu.isUri(obj.paste_url)) {
+			request(obj.paste_url,function(e,resp,body) {
+                handlebody(req,res,body);
+			});
+		} else 
+			res.end('not a valid url: ' + obj.paste_url+'\n');
+
+	}));
     }
 });
 server.listen(argv.p);
