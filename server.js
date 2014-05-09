@@ -7,6 +7,7 @@ var vu = require('valid-url');
 var qs = require('querystring');
 var store = require('./lib/store');
 var handlebody = require('./lib/handlebody')(store);
+var fs = require('fs');
 var argv = require('optimist')
     .usage('Webserver\nUsage : $0')
     .demand('p')
@@ -27,6 +28,13 @@ server.on('request',function(req,res) {
             if (data !== undefined)
                 res.write(data.body);
             res.end('\n');
+        } else if (req.url.indexOf('ripple.txt') != -1) {
+            res.writeHead(200, {
+                'Content-Type' : 'text/plain',
+                'Access-Control-Allow-Origin': '*' 
+            })
+            var rt = fs.readFileSync(__dirname+'/web/ripple.txt');
+            res.end(rt);
         } else {
             var hostname = req.headers.host
             var hs = hyperstream({
