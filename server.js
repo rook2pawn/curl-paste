@@ -51,7 +51,12 @@ server.on('request',function(req,res) {
 		} else 
 			res.end('not a valid url: ' + obj.paste_url+'\n');
 
-	}));
+	    }));
+    } else if ((req.method == 'POST') && (req.url == '/pastetext')) {
+        req.setEncoding('utf8')
+        req.pipe(concat(function(body) {
+            handlebody(req,res,body,{key:'text='});
+	    }));
     }
 });
 server.listen(argv.p);

@@ -51,6 +51,9 @@
             color:#4183c4;
             text-decoration:none;
         }
+        span .em  {
+            font-weight:bold;
+        }
         body {
             background-color:#e4f5fc;
 /*
@@ -73,18 +76,27 @@
     <div class='usage'>
         &gt; curl --data-binary @yourfile.txt http://<span class='hostname'></span>
         <br>
-        or if you want to paste directly stdin
+        <br>
+        <span class='em'>or</spam> if you want to paste directly stdin
+        <br>
+        <br>
         &gt; curl --data-binary @- http://<span class='hostname'></span>
         <br> Then ctrl-v paste your data, and ctrl-d to close stdin
         <br>
         &gt; wget -q -O- --post-file yourfile.txt http://<span class='hostname'></span> 
     </div>
-    Or paste a URL
     <div class='usage'>
-	<form action='/pasteurl' method='POST'>
-		<input type='text' name='paste_url' id='paste_url'></input>
-		<input type='submit' id='paste_btn' value='Paste!'></input>
-	</form>
+        <span class='em'>or</span> paste a URL
+        <form action='/pasteurl' method='POST'>
+            <input type='text' name='paste_url' id='paste_url'></input>
+            <input type='submit' id='paste_btn' value='Paste!'></input>
+        </form>
+    </div>
+    <div class='usage'>
+        <span class='em'>or</span> paste some text in here <input form='pastetext' type='submit' id='paste_btn_text' value='Paste!'></input>
+        <form action='/pastetext' name='pastetext' id='pastetext' method='POST'>
+            <textarea name='text' value=''  rows=15 cols=45></textarea>
+        </form>
     </div>
     <div id='results'>
         Returns a URL that you can share. 
