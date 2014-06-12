@@ -62,8 +62,10 @@ server.on('request',function(req,res) {
 	    }));
     } else if ((req.method == 'POST') && (req.url == '/pastetext')) {
         req.setEncoding('utf8')
+        console.log(req.headers)
         req.pipe(concat(function(body) {
-            handlebody(req,res,body,{key:'text='});
+            var text = qs.parse(body).text;
+            handlebody(req,res,text);
 	    }));
     }
 });
