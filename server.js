@@ -1,18 +1,22 @@
+var argv = require('optimist')
+    .usage('Webserver\nUsage : $0')
+    .demand('p')
+    .describe('p','port')
+    .describe('s','secret key on query')
+    .argv;
+console.log(argv)
 var http = require('http');
 var path = require('path');
 var concat = require('concat-stream');
 var hyperstream = require('hyperstream');
 var request = require('request');
 var vu = require('valid-url');
+var url = require('url')
 var qs = require('querystring');
 var store = require('./lib/store');
-var handlebody = require('./lib/handlebody')(store);
+var handlebody = require('./lib/handlebody')(store,argv.s);
 var fs = require('fs');
-var argv = require('optimist')
-    .usage('Webserver\nUsage : $0')
-    .demand('p')
-    .describe('p','port')
-    .argv;
+
 var ecstatic = require('ecstatic');
 
 var GLOBAL = {
@@ -22,6 +26,7 @@ var GLOBAL = {
 var server = http.createServer();
 server.on('request',function(req,res) {
 	console.log("REQ:",req.url,req.method);
+    var p = url.parse(req.url);
     if (req.method == 'GET') {
         if ((req.url.indexOf('/f') === 0) && (req.url.indexOf('/favicon') !== 0)) {
             var data = store.get(req.url);
@@ -43,12 +48,12 @@ server.on('request',function(req,res) {
             });
             ecstatic({dir:path.join(__dirname, '/web'),passthrough:hs})(req,res)
         }
-    } else if ((req.method == 'POST') && (req.url == '/')) {
+    } else if ((req.method == 'POST') && (p.pathname == '/')) {
         req.setEncoding('utf8')
         req.pipe(concat(function(body) {
             handlebody(req,res,body);
         }));
-    } else if ((req.method == 'POST') && (req.url == '/pasteurl')) {
+    } else if ((req.method == 'POST') && (p.pathname == '/pasteurl')) {
         req.setEncoding('utf8')
         req.pipe(concat(function(body) {
 		var obj=qs.parse(body);
@@ -60,7 +65,7 @@ server.on('request',function(req,res) {
 			res.end('not a valid url: ' + obj.paste_url+'\n');
 
 	    }));
-    } else if ((req.method == 'POST') && (req.url == '/pastetext')) {
+    } else if ((req.method == 'POST') && (p.pathname == '/pastetext')) {
         req.setEncoding('utf8')
         console.log(req.headers)
         req.pipe(concat(function(body) {
