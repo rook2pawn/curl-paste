@@ -24,7 +24,7 @@
     "concat-stream": "^1.4.4",
     "ecstatic": "https://github.com/rook2pawn/node-ecstatic/archive/stream_passthrough.tar.gz",
     "hashish": "0.0.4",
-    "hyperstream": "^0.5.0",
+    "hyperstream": "",
     "mime": "~1.2.11",
     "optimist": "^0.6.1",
     "request": "^2.34.0",

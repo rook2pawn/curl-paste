@@ -36,10 +36,11 @@ server.on('request',function(req,res) {
         } else {
             var hostname = req.headers.host
             var hs = hyperstream({
-                'html title' : hostname,
+                'title' : hostname,
                 'span.hostname' : hostname
             });
-            ecstatic({root:path.join(__dirname, '/web'),passthrough:hs})(req,res)
+            var obj = {'index.html':hs};
+            ecstatic({root:path.join(__dirname, '/web'),passthrough:obj})(req,res)
         }
     } else if ((req.method == 'POST') && (p.pathname == '/')) {
         req.setEncoding('utf8')
