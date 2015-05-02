@@ -35,6 +35,7 @@ server.on('request',function(req,res) {
             res.end('\n');
         } else {
             var hostname = req.headers.host
+            console.log("Hostname:", hostname);
             var hs = hyperstream({
                 'title' : hostname,
                 'span.hostname' : hostname
