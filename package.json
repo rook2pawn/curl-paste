@@ -22,7 +22,7 @@
   "homepage": "https://github.com/rook2pawn/curl-paste",
   "dependencies": {
     "concat-stream": "^1.4.4",
-    "ecstatic": "https://github.com/rook2pawn/node-ecstatic/archive/mysweet-passthrough-pull-request.tar.gz",
+    "ecstatic": "https://github.com/rook2pawn/node-ecstatic/archive/stream_passthrough.tar.gz",
     "hashish": "0.0.4",
     "hyperstream": "^0.5.0",
     "mime": "~1.2.11",

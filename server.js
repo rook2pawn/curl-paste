@@ -33,20 +33,13 @@ server.on('request',function(req,res) {
             if (data !== undefined)
                 res.write(data.body);
             res.end('\n');
-        } else if (req.url.indexOf('ripple.txt') != -1) {
-            res.writeHead(200, {
-                'Content-Type' : 'text/plain',
-                'Access-Control-Allow-Origin': '*' 
-            })
-            var rt = fs.readFileSync(__dirname+'/web/ripple.txt');
-            res.end(rt);
         } else {
             var hostname = req.headers.host
             var hs = hyperstream({
                 'html title' : hostname,
                 'span.hostname' : hostname
             });
-            ecstatic({dir:path.join(__dirname, '/web'),passthrough:hs})(req,res)
+            ecstatic({root:path.join(__dirname, '/web'),passthrough:hs})(req,res)
         }
     } else if ((req.method == 'POST') && (p.pathname == '/')) {
         req.setEncoding('utf8')
@@ -70,6 +63,8 @@ server.on('request',function(req,res) {
         console.log(req.headers)
         req.pipe(concat(function(body) {
             var text = qs.parse(body).text;
+            text = text.replace(/\r\n/g,'\n');
+            console.log(text)
             handlebody(req,res,text);
 	    }));
     }
