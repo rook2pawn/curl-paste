@@ -23,3 +23,6 @@ Which you can then retrieve the contents at that URL
     And visited the Sea –
     The Mermaids in the Basement
     Came out to look at me –
+
+
+There's also a web interface, just point your browser at http://localhost:8500
