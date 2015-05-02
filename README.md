@@ -5,10 +5,10 @@ curl-paste
 
     with foo.txt being
     
-    *I started Early – Took my Dog –*
-    *And visited the Sea –*
-    *The Mermaids in the Basement*
-    *Came out to look at me –*
+*I started Early – Took my Dog –*
+*And visited the Sea –*
+*The Mermaids in the Basement*
+*Came out to look at me –*
 
     > curl --data-binary @foo.txt http://localhost:8500
     
