@@ -1,0 +1,59 @@
+div#main {
+  margin:0 auto;
+  width:60%;
+  padding:2em;
+  background-color:white;
+}
+div#wrapper {
+  background-color:#F5CEA4;
+  background: linear-gradient(to bottom, #f5cea4 0%, #7f6e55 100%);
+  position:relative;
+}
+div#w_bl {
+  position:absolute;
+  width: 0px;
+  height: 0px;
+  bottom:0; 
+  left:0;
+  background-color:transparent;
+  border-style: solid;
+  border-width: 30px 0 0 30px;
+  border-color: transparent transparent transparent #e4f5fc;
+}
+div#w_tr {
+  position:absolute;
+  top:0;
+  right:0;
+  background-color:transparent;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 30px 30px 0;
+  border-color: transparent #e4f5fc transparent transparent;
+}
+div.usage {
+  padding:1em;
+}
+div#results {
+  padding:1em;
+}
+div#github a:visited {
+  color:#4183c4;
+}
+div#github a:hover {
+  text-decoration:underline;
+}
+div#github a {
+  color:#4183c4;
+  text-decoration:none;
+}
+span .em  {
+  font-weight:bold;
+}
+body {
+  background-color:#e4f5fc;
+/*
+  background: linear-gradient(to bottom, #e4f5fc 0%,#bfe8f9 50%,#9fd8ef 100%);
+*/
+  font-family: 'Ubuntu Mono', sans-serif;
+}
