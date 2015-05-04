@@ -4,7 +4,7 @@
   "description": "curl-paste.us",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test.js"
+    "test": "tape ./test/test.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
-    "supertest": "^0.15.0"
+    "supertest": "^0.15.0",
+    "tape": "^4.0.0"
   }
 }

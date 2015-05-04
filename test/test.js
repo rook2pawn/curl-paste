@@ -1,33 +1,58 @@
+var test = require('tape');
+var url = require('url')
 var store = require('../lib/store')({
-    duration: 1000*60*60*168,
-    checkfrequency: 1000*60
+  duration: 1000*60*60*168,
+  checkfrequency: 1000*60
 })
 var handle = require('../lib/handle')(store)
-var inputhash = { 
-    a : {val: 'foo', timestamp:1349 },
-    b : {val: 'foo', timestamp:1351 },
-    c : {val: 'foo', timestamp:1490 },
-    d : {val: 'foo', timestamp:1550 },
-    e : {val: 'foo', timestamp:1600 }
-}
-console.log(store.clean(inputhash,1700,160))
-
+var vu = require('valid-url');
 var request = require('supertest')
-request(handle.request)
-  .get('/')
-  .expect(404)
-  .expect('File not found. :(')
-  .end(function(err, res){
-    if (err) throw err;
-  });
 
+test('get',function(t) {
+  request(handle.request)
+    .get('/')
+    .expect(200)
+    .expect('curlpaste.us: curl --data-binary @your-file-here.txt http://curlpaste.us\n')
+    .end(function(err, res){
+      t.end(err)
+    });
+});
 
-request(handle.request)
-  .get('/')
-  .expect(404)
-  .expect('File not found. :(')
-  .end(function(err, res){
-    if (err) throw err;
-  });
+test('post and then get',function(t) {
+  var my_url;
+  var agent = request(handle.request)
+  t.test('first part post',function(st) {
+    agent
+    .post('/')
+    .send('foobar')
+    .expect(function(res) {
+      var _url = res.text.slice(0,-1)
+      if (vu.isUri(_url) === false) {
+        st.fail("not valid url "+_url)
+      } else {
+        st.pass("valid url "+_url)
+        my_url = _url; 
+      }
+    })
+    .end(function(err,res) {
+      console.log("done",err)
+      st.end(err)
+    })
+  })
 
-
+  t.test('second part get',function(st) {
+    var href = url.parse(my_url).path;
+    agent
+    .get(href)
+    .expect(function(res) {
+// if you uncomment the following line, npm test will fail
+// but tape test/test.js will work ?
+//      st.comment("got text:" + res.text)
+      st.equal(res.text, 'foobar\n')
+    })
+    .end(function(err,res) {
+      console.log("done",err)
+      st.end(err)
+    })
+  })
+});
