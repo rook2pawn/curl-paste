@@ -1,10 +1,10 @@
 {
   "name": "curl-paste",
-  "version": "0.0.0",
-  "description": "Curl-paste.com",
+  "version": "0.0.1",
+  "description": "curl-paste.us",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,8 @@
     "optimist": "^0.6.1",
     "request": "^2.34.0",
     "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "supertest": "^0.15.0"
   }
 }
