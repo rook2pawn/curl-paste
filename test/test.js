@@ -1,4 +1,4 @@
-var store = require('../lib/store');
+var store = require('../lib/store')();
 
 var inputhash = { 
     a : {val: 'foo', timestamp:1349 },
