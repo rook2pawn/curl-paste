@@ -16,12 +16,12 @@ div#header ul {
 div#header ul li {
   display:inline;
 }
-div#sharelink {
+div.sharelink {
   margin:0 auto;
   width:60%;
   margin-bottom:0.5em;
 }
-div#sharelink a {
+div.sharelink a {
   background-image:url(link.png);
   color:#4183c4;
   text-decoration:none;
