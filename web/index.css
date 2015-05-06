@@ -8,6 +8,14 @@ div#headerbar {
   width:60%;
   margin:0 auto;
 }
+div#header ul {
+  display:inline;
+  list-style-type:none;
+  margin:0; padding:0;
+}
+div#header ul li {
+  display:inline;
+}
 div#main {
   margin:0 auto;
   width:60%;
