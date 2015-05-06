@@ -16,6 +16,24 @@ div#header ul {
 div#header ul li {
   display:inline;
 }
+div#sharelink {
+  margin:0 auto;
+  width:60%;
+  margin-bottom:0.5em;
+}
+div#sharelink a {
+  background-image:url(link.png);
+  color:#4183c4;
+  text-decoration:none;
+  padding-left:25px;
+  background-repeat:no-repeat;
+  line-height:25px;
+  height:25px;
+  display:inline-block;
+}
+form#pastetext textarea {
+  width:95%;
+}
 div#main {
   margin:0 auto;
   width:60%;
