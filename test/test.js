@@ -9,11 +9,15 @@ var vu = require('valid-url');
 var request = require('supertest')
 
 test('get',function(t) {
-  request(handle.request)
+  var agent = request(handle.request)
+  agent
     .get('/')
     .expect(200)
-    .expect('curlpaste.us: curl --data-binary @your-file-here.txt http://curlpaste.us\n')
+    .expect(function(res) {
+      return (res.text.indexOf('curl --data-binary @your-file-here.txt') == -1)
+    })
     .end(function(err, res){
+    console.log(err)
       t.end(err)
     });
 });
