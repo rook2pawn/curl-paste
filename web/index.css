@@ -95,10 +95,10 @@ body {
 }
 @-webkit-keyframes spinner { 
   0% {
-    -webkit-transform:translateX(-100px) rotate(0deg);
+    -webkit-transform:translateX(-100px);
   }
   100% {
-    -webkit-transform:translateX(0px) rotate(360deg);
+    -webkit-transform:translateX(0px);
   }
 }
 @-webkit-keyframes blip { 
