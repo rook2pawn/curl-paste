@@ -8,7 +8,7 @@
 <body>
 <div id='header'>
   <div id='headerbar'>
-    <span><a id='home' href=''></a>, #1 dev paste site</span>
+    <a id='home' href=''>the url</a>#1 dev paste site
     <ul>
       <li><a href='#'>Developer FAQ</a></li>
       <li><a href='http://github.com/rook2pawn/curl-paste'>Github</a></li>
@@ -18,18 +18,18 @@
 <div id='wrapper'>
 <div id='main'>
     Usage:
-    <div class='usage'>
-        &gt; curl --data-binary @yourfile.txt http://<span class='hostname'></span>
+    <div class='usage usage_1'>
+        &gt; <span class='usage_1'>curl</span> --data-binary @yourfile.txt http://<span class='hostname'></span>
         <br>
         <br>
         <span class='em'>or</span>
         <br>
         <br>
         <br>
-        &gt; wget -q -O- --post-file yourfile.txt http://<span class='hostname'></span> 
+        &gt; <span class='usage_1'>wget</span> -q -O- --post-file yourfile.txt http://<span class='hostname'></span> 
     </div>
-    <div class='usage'>
-        <span class='em'>or</span> paste some text in here <input form='pastetext' type='submit' id='paste_btn_text' value='Paste!'></input>
+    <div class='usage usage_2'>
+        <span class='usage_2'> Or paste some text in here</span> <input form='pastetext' type='submit' id='paste_btn_text' value='Paste!'></input>
         <form action='/pastetext' name='pastetext' id='pastetext' method='POST'>
             <textarea name='text' value='' rows=10></textarea>
         </form>

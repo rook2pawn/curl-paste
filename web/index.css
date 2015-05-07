@@ -20,6 +20,24 @@ div.sharelink {
   width:60%;
   margin-bottom:0.5em;
 }
+a#home {
+  display:inline-block;
+  -webkit-animation: spinner 1500ms ease;
+}
+div.usage_1:hover {
+  background-color:#b9ffd0;
+  -webkit-transition: background-color 500ms;
+}
+div.usage_2:hover {
+  background-color:#b9ffd0;
+  -webkit-transition: background-color 500ms;
+}
+div.usage_1:hover span.usage_1 {
+  -webkit-animation: blip 500ms ease;
+}
+div.usage_2:hover span.usage_2 {
+  -webkit-animation: blip 500ms ease;
+}
 div.sharelink a {
   background-image:url(link.png);
   color:#4183c4;
@@ -30,6 +48,7 @@ div.sharelink a {
   height:25px;
   display:inline-block;
 }
+
 form#pastetext textarea {
   width:95%;
 }
@@ -45,6 +64,7 @@ div#wrapper {
 }
 div.usage {
   padding:1em;
+  border-radius:5px;
 }
 div#results {
   padding:1em;
@@ -72,4 +92,22 @@ body {
   padding:0;margin:0;
   background-color:#e4f5fc;
   font-family: 'Ubuntu Mono', sans-serif;
+}
+@-webkit-keyframes spinner { 
+  0% {
+    -webkit-transform:translateX(-100px) rotate(0deg);
+  }
+  100% {
+    -webkit-transform:translateX(0px) rotate(360deg);
+  }
+}
+@-webkit-keyframes blip { 
+  0% {
+  }
+  50% {
+    -webkit-transform:scale(1.2)
+  }
+  100% {
+    -webkit-transform:scale(1)
+  }
 }
