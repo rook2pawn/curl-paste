@@ -14,5 +14,3 @@ var handle = require('./lib/handle')(store,argv.s);
 var server = http.createServer();
 server.on('request',handle.request);
 server.listen(argv.p);
-
-store.start();
