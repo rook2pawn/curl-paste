@@ -3,6 +3,9 @@ div#header {
   margin-top:1em; 
   margin-bottom:1em;
 }
+pre {
+  margin:0;
+}
 div#headerbar {
   width:60%;
   margin:0 auto;
@@ -21,6 +24,7 @@ div.sharelink {
   margin-bottom:0.5em;
 }
 a#home {
+  margin-right:5px;
   display:inline-block;
   -webkit-animation: spinner 1500ms ease;
 }
@@ -56,7 +60,8 @@ div#main {
   margin:0 auto;
   width:60%;
   padding:1em;
-  background-color:white;
+  background-color:#99C9C4;
+  background-color:#F9F9EF;
   box-shadow:#666 3px 3px 15px; 
 }
 div#wrapper {
