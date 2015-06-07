@@ -5,6 +5,8 @@ div#header {
 }
 pre {
   margin:0;
+  word-wrap:break-word;
+  width:100%;
 }
 div#headerbar {
   width:60%;
