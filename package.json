@@ -29,6 +29,7 @@
     "mime": "~1.2.11",
     "optimist": "^0.6.1",
     "request": "^2.34.0",
+    "router-middleware": "",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
