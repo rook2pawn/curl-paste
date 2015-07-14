@@ -22,7 +22,7 @@
   "homepage": "https://github.com/rook2pawn/curl-paste",
   "dependencies": {
     "concat-stream": "^1.4.4",
-    "ecstatic": "https://github.com/rook2pawn/node-ecstatic/archive/stream_passthrough.tar.gz",
+    "ecstatic": "https://github.com/rook2pawn/node-ecstatic/archive/extra-stream.tar.gz",
     "hashish": "0.0.4",
     "hyperstream": "",
     "level": "^0.18.0",

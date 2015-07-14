@@ -4,6 +4,8 @@ var argv = require('optimist')
     .describe('p','port')
     .describe('s','secret key on query')
     .argv;
+
+var secret = argv.s;
 var router = require('router-middleware');
 var http = require('http');
 var kb = 1024;// number of bytes in kb
@@ -18,7 +20,7 @@ var url = require('url')
 var qs = require('querystring');
 var fs = require('fs');
 var ecstatic = require('ecstatic');
-var lib = require('./lib')
+var lib = require('./lib/handle')
 var store = require('./lib/store')({
     duration: 1000*60*60*168,
     checkfrequency: 1000*60
@@ -26,7 +28,7 @@ var store = require('./lib/store')({
 var server = http.createServer(router);
 server.listen(argv.p);
 
-router.get(function(path) {
+router.get(function(path,req) {
   if ((path.indexOf('/f') === 0) && (path.indexOf('/favicon') !== 0)) {
     return true
   }
@@ -45,9 +47,10 @@ router.get(function(path) {
   })
 })
 
-router.get(function(path) {
-  if (req.url.indexOf('/id/') === 0)
+router.get(function(path,req) {
+  if (req.url.indexOf('/id/') === 0) {
     return true
+  }
 },function(req,res,next) {
   store.getWeb(req.url,function(err,data) {
     if (err === null) {
@@ -61,8 +64,8 @@ router.get(function(path) {
       'a#rawlink' : { href : 'http://'+hostname+'/f'+data.id, _html: 'http://'+hostname+'/f'+data.id},
       'a#weblink' : { href : 'http://'+hostname+'/id/'+data.id, _html: 'http://'+hostname+'/id/'+data.id}
       });
-      var obj = {'view.html':hs};
-      ecstatic({root:path.join(__dirname, '../web'),template:'view.html',passthrough:obj})(req,res)
+      var obj = {file:'view.html',template:true,stream:hs};
+      ecstatic({root:path.join(__dirname, '/web'),streamMap:obj})(req,res)
     } else {
       res.end('\n');
     }
@@ -80,8 +83,8 @@ router.get(function(path,req) {
       'span.hostname' : hostname,
       'a#home' : { href : 'http://'+hostname , _html : 'http://'+hostname }
   });
-  var obj = {'index.html':hs};
-  ecstatic({autoIndex:true,root:path.join(__dirname, '../web'),passthrough:obj})(req,res)
+  var obj = {file:'index.html',stream:hs};
+  ecstatic({autoIndex:true,root:path.join(__dirname, '/web'),streamMap:obj})(req,res)
 })
 
 router.get(function(path,req) {
@@ -94,7 +97,33 @@ router.get(function(path,req) {
   res.write(hostname + ': curl --data-binary @your-file-here.txt http://'+hostname)
   res.end('\n') 
 })
-
+var handlebody = function(req,res,body) {
+  if (body.length === 0) {
+    res.write('cannot paste empty text');
+    res.end('\n');
+    return
+  }
+  var p = qs.parse(url.parse(req.url).query);
+  if ((secret !== undefined) && (p.secret && secret) && (p.secret === secret)) {
+    // bypassing size limit
+  } else if (body.length > kb*100) { 
+    console.log("Flood attack or faulty client, nuking request");
+    res.write('File size exceeded '+ kb*100 + ' bytes');
+    res.end('\n');
+    req.connection.destroy();
+    return
+  } 
+  store.write(body,function(err,id) {
+    var hostname = req.headers.host
+    if (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null) {
+        res.writeHead(301, {'Location':'/id/'+id})
+        res.end('\n');
+    } else {
+        res.write('raw: http://'+hostname+'/f'+id + '\nweb: http://'+hostname+'/id/'+id);
+        res.end('\n');
+    }
+  })
+}
 
 router.post('/', function(req,res,next) {
   req.setEncoding('utf8')
