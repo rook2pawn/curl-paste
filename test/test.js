@@ -1,5 +1,6 @@
 var test = require('tape');
 var url = require('url')
+var concat = require('concat-stream')
 var store = require('../lib/store')({
   duration: 1000*60*60*168,
   checkfrequency: 1000*60
@@ -7,14 +8,16 @@ var store = require('../lib/store')({
 var handle = require('../lib/handle')(store)
 var vu = require('valid-url');
 var request = require('supertest')
+var assert = require('assert')
 
 test('get',function(t) {
-  var agent = request(handle.request)
-  agent
-    .get('/')
+  t.plan(1)
+  var agent = request(handle.curlWeb)
+  var get = agent.get('/')
+    get
     .expect(200)
     .expect(function(res) {
-      return (res.text.indexOf('curl --data-binary @your-file-here.txt') == -1)
+      t.equal(get.host + ': curl --data-binary @your-file-here.txt http://'+get.host,res.text.trim())
     })
     .end(function(err, res){
     console.log(err)
@@ -25,7 +28,12 @@ test('get',function(t) {
 test('post and then get',function(t) {
   var raw_url;
   var web_url;
-  var agent = request(handle.request)
+  var agent = request(function(req,res,next) {
+    req.setEncoding('utf8')
+    req.pipe(concat(function(body) {
+      handle.handleBody(req,res,body);
+    }))
+  })
   t.test('first part post',function(st) {
     agent
     .post('/')
@@ -54,6 +62,7 @@ test('post and then get',function(t) {
 
   t.test('second part get',function(st) {
     var href = url.parse(raw_url).path;
+    agent = request(handle.getFile)
     agent
     .get(href)
     .expect(function(res) {

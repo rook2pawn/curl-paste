@@ -1,6 +1,6 @@
 {
   "name": "curl-paste",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "curl-paste.us",
   "main": "index.js",
   "scripts": {
@@ -21,19 +21,19 @@
   },
   "homepage": "https://github.com/rook2pawn/curl-paste",
   "dependencies": {
-    "concat-stream": "^1.4.4",
+    "concat-stream": "",
     "ecstatic": "https://github.com/rook2pawn/node-ecstatic/archive/extra-stream.tar.gz",
-    "hashish": "0.0.4",
+    "hashish": "",
     "hyperstream": "",
-    "level": "^0.18.0",
-    "mime": "~1.2.11",
-    "optimist": "^0.6.1",
-    "request": "^2.34.0",
+    "level": "",
+    "mime": "",
+    "optimist": "",
+    "request": "",
     "router-middleware": "",
-    "valid-url": "^1.0.9"
+    "valid-url": ""
   },
   "devDependencies": {
-    "supertest": "^0.15.0",
-    "tape": "^4.0.0"
+    "supertest": "",
+    "tape": ""
   }
 }
