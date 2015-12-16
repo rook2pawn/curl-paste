@@ -20,7 +20,7 @@ div#header ul {
 div#header ul li {
   display:inline;
 }
-div.sharelink {
+div.sharelink_curlpaste {
   margin:0 auto;
   width:60%;
   margin-bottom:0.5em;
