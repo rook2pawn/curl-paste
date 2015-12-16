@@ -11,7 +11,6 @@ var http = require('http');
 var kb = 1024;// number of bytes in kb
 var qs = require('querystring');
 var url = require('url')
-var path = require('path');
 var concat = require('concat-stream');
 var request = require('request');
 var vu = require('valid-url');
