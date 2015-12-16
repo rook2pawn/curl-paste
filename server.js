@@ -26,6 +26,12 @@ var lib = require('./lib/handle')(store)
 var server = http.createServer(router);
 server.listen(argv.p);
 
+router[404](function(req,res) {
+  res.writeHead(404);
+  res.write("not found :-(");
+  res.end() 
+})
+
 router.get(function(path,req) {
   if ((path.indexOf('/f') === 0) && (path.indexOf('/favicon') !== 0)) {
     return true
