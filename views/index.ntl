@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+    <title>CURL-PASTE.ORG</title>
+    <link rel='stylesheet' type='text/css' href="index.css" />
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id='header'>
+  <div id='headerbar'>
+    <a id='home' href=''>the url</a>#1 dev paste site
+    <ul>
+      <li><a href='#'>Developer FAQ</a></li>
+      <li><a href='http://github.com/rook2pawn/curl-paste'>Github</a></li>
+    </ul>
+  </div> 
+</div>
+<div id='wrapper'>
+<div id='main'>
+    Usage:
+    <div class='usage usage_1'>
+        &gt; <span class='usage_1'>curl</span> --data-binary @yourfile.txt http://<span class='hostname'>#hostname#</span>
+        <br>
+        <br>
+        <span class='em'>or</span>
+        <br>
+        <br>
+        <br>
+        &gt; <span class='usage_1'>wget</span> -q -O- --post-file yourfile.txt http://<span class='hostname'>#hostname#</span> 
+    </div>
+    <div class='usage usage_2'>
+        <span class='usage_2'> Or paste some text in here</span> <input form='pastetext' type='submit' id='paste_btn_text' value='Paste!'></input>
+        <form action='/web' name='pastetext' id='pastetext' method='POST'>
+            <textarea name='text' value='' rows=10></textarea>
+        </form>
+    </div>
+    <div id='results'>
+        Returns a URL that you can share. 
+    </div>
+    <div id='github'>
+        <a href="http://github.com/rook2pawn/curl-paste">curl-paste @ github</a>
+    </div>
+</div>
+</div>
+</body>
+</html>

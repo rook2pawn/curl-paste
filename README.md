@@ -3,28 +3,37 @@
 curl-paste
 ==========
 
-    node server.js -p 8500
+* <a href='#regularapi'>Regular API</a>
+* <a href='#secureapi'>Secure API - View Once Methods</a>
 
-with foo.txt being
-    
-*I started Early – Took my Dog –*  
-*And visited the Sea –*  
-*The Mermaids in the Basement*  
-*Came out to look at me –* 
+<a name='regularapi'></a>
+Regular API
+===========
 
-    > curl --data-binary @foo.txt http://localhost:8500
-    
-gives you back a URL
+GET /{id}
+---------
+Returns document at {id}
 
-    > http://localhost:8500/fo4ia6w
+GET /web/{id}
+-------------
+Returns document in web view at {id}
 
-Which you can then retrieve the contents at that URL
-    
-    > curl http://localhost:8500/fo4ia6w
-    I started Early – Took my Dog –
-    And visited the Sea –
-    The Mermaids in the Basement
-    Came out to look at me –
+POST /
+------
+Upload document, returns {id}
 
+POST /pastetext
+---------------
+Upload document from web view
 
-There's also a web interface, just point your browser at http://localhost:8500
+<a name='secureapi'></a>
+Secure Methods
+==============
+
+POST /once
+----------
+Upload document, returns {id}. After one GET of {id}, document is deleted.
+
+POST /once?expires={seconds}
+----------------------------
+Upload document, returns {id}. After one GET of {id}, document is deleted. Document is also deleted after {seconds}.

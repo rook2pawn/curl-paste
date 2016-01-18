@@ -1,0 +1,24 @@
+<html>
+<head>
+    <meta content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+    <title>CURL-PASTE.ORG</title>
+    <link rel='stylesheet' type='text/css' href="../index.css" />
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id='header'>
+  <div id='headerbar'>
+    <a id='home' href=''></a>#1 dev paste site
+    <ul>
+      <li><a href='#'>Developer FAQ</a></li>
+      <li><a href='http://github.com/rook2pawn/curl-paste'>Github</a></li>
+    </ul>
+  </div> 
+</div>
+<div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href=''></a></div>
+<div class='sharelink_curlpaste'>Web URL: <a id='weblink' href=''></a></div>
+<div id='main'>
+  <pre>#content#</pre>
+</div>
+</body>
+</html>

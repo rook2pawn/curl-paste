@@ -1,89 +1,51 @@
 var argv = require('optimist')
-    .usage('Webserver\nUsage : $0')
+    .usage('curlpaste\nUsage : $0')
     .demand('p')
     .describe('p','port')
-    .describe('s','secret key on query')
     .argv;
 
-var secret = argv.s;
-var router = require('router-middleware');
-var http = require('http');
-var kb = 1024;// number of bytes in kb
-var qs = require('querystring');
-var url = require('url')
-var concat = require('concat-stream');
-var request = require('request');
-var vu = require('valid-url');
-var url = require('url')
-var qs = require('querystring');
-var fs = require('fs');
-var store = require('./lib/store')({
-    duration: 1000*60*60*168,
-    checkfrequency: 1000*60
-})
-var lib = require('./lib/handle')(store)
-var server = http.createServer(router);
-server.listen(argv.p);
+var http = require('http')
+var router = require('router-middleware')
+var app = router()
+var lib = require('./lib/index')
+var path = require('path')
+var ecstatic = require('ecstatic')({root:path.join(__dirname,'web')})
+var fs = require('fs')
+var server = http.createServer(app)
+server.listen(argv.p)
 
-router[404](function(req,res) {
-  res.writeHead(404);
-  res.write("not found :-(");
-  res.end() 
-})
-
-router.get(function(path,req) {
-  if ((path.indexOf('/f') === 0) && (path.indexOf('/favicon') !== 0)) {
-    return true
+app.fileserver(ecstatic)
+app.get('/',function(req,res,next) {
+  if (req.headers['user-agent'] && (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null)) {
+    res.render('index',{hostname:req.headers.host})
+  } else {
+    var hostname = req.headers.host
+    res.write(hostname + ': curl --data-binary @your-file-here.txt http://'+hostname)
+    res.end('\n') 
   }
-},lib.getFile)
-
-router.get(function(path,req) {
-  if (req.url.indexOf('/id/') === 0) {
-    return true
-  }
-},lib.getWeb)
-
-router.get(function(path,req) {
-  var hostname = req.headers.host
-  if (req.headers['user-agent'] && (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null))
-    return true
-}, lib.pageWeb)
-
-router.get(function(path,req) {
-  var hostname = req.headers.host
-  if (req.headers['user-agent'] && (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null))
-    return false
-  else return true
-},lib.curlWeb)
-
-
-
-router.post('/', function(req,res,next) {
-  req.setEncoding('utf8')
-  req.pipe(concat(function(body) {
-      lib.handleBody(req,res,body);
-  }));
 })
+app.get('/id/:id',lib.getFile,lib.deleteIfViewOnce)
+app.get('/web/:id',lib.getFileWeb,lib.deleteIfViewOnce)
+app.post('/',lib.writeFile)
+app.post('/web',lib.writeFileWeb)
+app.post('/once',lib.writeFileViewOnce)
+app.get('/clean',lib.clean)
+
+setInterval(lib.cleanSecure,10000)
+lib.cleanSecure()
 
 
-router.post('/pasteurl', function(req,res,next) {
-  req.setEncoding('utf8')
-  req.pipe(concat(function(body) {
-  var obj=qs.parse(body);
-  if (vu.isUri(obj.paste_url)) {
-    request(obj.paste_url,function(e,resp,body) {
-      lib.handleBody(req,res,body);
-    });
-  } else 
-      res.end('not a valid url: ' + obj.paste_url+'\n');
-  }))
-})
-
-router.post('/pastetext', function(req,res,next) {
-  req.setEncoding('utf8')
-  req.pipe(concat(function(body) {
-    var text = qs.parse(body).text;
-    text = text.replace(/\r\n/g,'\n');
-    lib.handleBody(req,res,text);
-  }));
-})
+app.engine('ntl', function (filePath, options, callback) { // define the template engine
+  fs.readFile(filePath, function (err, content) {
+    if (err) return callback(new Error(err));
+    // this is an extremely simple template engine
+    var rendered = content.toString();
+    Object.keys(options).forEach(function(key) {
+      var re = new RegExp("#" + key + "#","gm")
+      rendered = rendered.replace(re,options[key])
+    })
+    return callback(null, rendered);
+  })
+});
+app.set('views', './views'); // specify the views directory
+app.set('view engine', 'ntl'); // register the template engine

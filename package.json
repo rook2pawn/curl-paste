@@ -21,16 +21,15 @@
   },
   "homepage": "https://github.com/rook2pawn/curl-paste",
   "dependencies": {
-    "concat-stream": "",
-    "ecstatic": "https://github.com/rook2pawn/node-ecstatic/archive/extra-stream.tar.gz",
-    "hashish": "",
-    "hyperstream": "",
-    "level": "",
-    "mime": "",
-    "optimist": "",
-    "request": "",
+    "concat-stream": "^1.5.1",
+    "ecstatic": "^1.4.0",
+    "jsonstream": "^1.0.3",
+    "level": "^1.4.0",
+    "level-sublevel": "^6.5.2",
+    "optimist": "^0.6.1",
     "router-middleware": "",
-    "valid-url": ""
+    "through": "^2.3.8",
+    "through2": "^2.0.0"
   },
   "devDependencies": {
     "supertest": "",
