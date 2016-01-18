@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
-    <title>CURL-PASTE.ORG</title>
+    <title>curlpaste.com</title>
     <link rel='stylesheet' type='text/css' href="index.css" />
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
 </head>
@@ -30,6 +30,7 @@
     <div class='usage'>
         <span> Or paste some text in here</span> <input form='pastetext' type='submit' id='paste_btn_text' value='Paste!'></input>
         <form action='/web' name='pastetext' id='pastetext' method='POST'>
+            <input type='checkbox' name='secure'>Secure Paste
             <textarea name='text' value='' rows=10></textarea>
         </form>
     </div>
