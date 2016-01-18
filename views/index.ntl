@@ -30,7 +30,7 @@
     <div class='usage'>
         <span> Or paste some text in here</span> <input form='pastetext' type='submit' id='paste_btn_text' value='Paste!'></input>
         <form action='/web' name='pastetext' id='pastetext' method='POST'>
-            <input type='checkbox' name='secure'>Secure Paste
+            <input type='checkbox' name='secure'>Secure Paste (deleted after one minute, or viewed once)
             <textarea name='text' value='' rows=10></textarea>
         </form>
     </div>
