@@ -22,7 +22,7 @@ POST /
 ------
 Upload document, returns {id}
 
-POST /pastetext
+POST /web
 ---------------
 Upload document from web view
 
