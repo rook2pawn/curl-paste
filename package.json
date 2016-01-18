@@ -23,6 +23,7 @@
   "dependencies": {
     "concat-stream": "^1.5.1",
     "ecstatic": "^1.4.0",
+    "ent": "^2.2.0",
     "jsonstream": "^1.0.3",
     "level": "^1.4.0",
     "level-sublevel": "^6.5.2",
