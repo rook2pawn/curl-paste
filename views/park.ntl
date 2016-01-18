@@ -17,8 +17,5 @@
 </div>
 <div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href='#rawlink#'>#rawlink#</a></div>
 <div class='sharelink_curlpaste'>Web URL: <a id='weblink' href='#weblink#'>#weblink#</a></div>
-<div id='main'>
-  <pre>#content#</pre>
-</div>
 </body>
 </html>

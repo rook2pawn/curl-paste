@@ -29,8 +29,7 @@ app.get('/web/:id',lib.getFileWeb,lib.deleteIfViewOnce)
 app.post('/',lib.writeFile)
 app.post('/web',lib.writeFileWeb)
 app.post('/once',lib.writeFileViewOnce)
-app.get('/clean',lib.clean)
-
+app.get('/park/:id',lib.showParking)
 setInterval(lib.cleanSecure,10000)
 lib.cleanSecure()
 
