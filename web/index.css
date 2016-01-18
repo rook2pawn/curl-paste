@@ -11,6 +11,9 @@ pre {
   word-wrap:break-word;
   width:100%;
 }
+div.description {
+  font-family:monospace;
+}
 div#headerbar {
   width:60%;
   margin:0 auto;
@@ -33,15 +36,23 @@ a#home {
   display:inline-block;
   -webkit-animation: spinner 1500ms ease;
 }
-div.usage.basic {
-  background-color:#b9ffd0;
-}
-div.usage.secure{
-  background-color:#b9ffd0;
+div.usage {
+  margin-top:10px;
 }
 div.usage:hover {
   background-color:#b9ffd0;
-  -webkit-transition: background-color 500ms;
+}
+div.usage.basic {
+
+}
+div.usage.secure{
+}
+div.usage.secure h2 {
+  background-image:url(lock.png);
+  background-repeat:no-repeat;
+  padding-left:32px;
+  height:32px;
+  line-height:32px;
 }
 div.usage:hover span.blip {
   -webkit-animation: blip 500ms ease;
@@ -62,6 +73,7 @@ form#pastetext textarea {
 }
 div#main {
   margin:0 auto;
+  min-width:530px;
   width:60%;
   padding:1em;
   background-color:#99C9C4;
