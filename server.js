@@ -4,23 +4,29 @@ var argv = require('optimist')
     .describe('p','port')
     .argv;
 
-var http = require('http')
 var router = require('router-middleware')
 var app = router()
 var lib = require('./lib/index')
 var path = require('path')
 var ecstatic = require('ecstatic')({root:path.join(__dirname,'web')})
 var fs = require('fs')
-var server = http.createServer(app)
+
+var https = require('https')
+var server = https.createServer({key:fs.readFileSync('privkey.pem'),cert:fs.readFileSync('fullchain.pem')},app)
+//var http = require('http')
+//var server = http.createServer(app)
 server.listen(argv.p)
 
 app.fileserver(ecstatic)
 app.get('/',function(req,res,next) {
+  var protocol = 'http'    
+  if (req.connection.encrypted)
+    protocol = 'https'
   if (req.headers['user-agent'] && (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null)) {
-    res.render('index',{homeurl:'http://'+req.headers.host,hostname:req.headers.host})
+    res.render('index',{homeurl:protocol+'://'+req.headers.host})
   } else {
     var hostname = req.headers.host
-    res.write(hostname + ': curl --data-binary @your-file-here.txt http://'+hostname)
+    res.write(hostname + ': curl --data-binary @your-file-here.txt '+protocol+'://'+hostname)
     res.end('\n') 
   }
 })
