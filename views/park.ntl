@@ -15,7 +15,12 @@
     </ul>
   </div> 
 </div>
-<div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href='#rawlink#'>#rawlink#</a></div>
-<div class='sharelink_curlpaste'>Web URL: <a id='weblink' href='#weblink#'>#weblink#</a></div>
+<div id='wrapper'>
+<div id='main'>
+  These are view once links with a lifetime of one minute.
+  <div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href='#rawlink#'>#rawlink#</a></div>
+  <div class='sharelink_curlpaste'>Web URL: <a id='weblink' href='#weblink#'>#weblink#</a></div>
+</div>
+</div>
 </body>
 </html>
