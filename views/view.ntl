@@ -8,15 +8,15 @@
 <body>
 <div id='header'>
   <div id='headerbar'>
-    <a id='home' href=''></a>#1 dev paste site
+    <a id='home' href='#homeurl#'>#homeurl#</a>#1 dev paste site
     <ul>
       <li><a href='#'>Developer FAQ</a></li>
       <li><a href='http://github.com/rook2pawn/curl-paste'>Github</a></li>
     </ul>
   </div> 
 </div>
-<div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href=''></a></div>
-<div class='sharelink_curlpaste'>Web URL: <a id='weblink' href=''></a></div>
+<div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href='#rawlink#'>#rawlink#</a></div>
+<div class='sharelink_curlpaste'>Web URL: <a id='weblink' href='#weblink#'>#weblink#</a></div>
 <div id='main'>
   <pre>#content#</pre>
 </div>

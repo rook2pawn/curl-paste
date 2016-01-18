@@ -17,7 +17,7 @@ server.listen(argv.p)
 app.fileserver(ecstatic)
 app.get('/',function(req,res,next) {
   if (req.headers['user-agent'] && (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null)) {
-    res.render('index',{hostname:req.headers.host})
+    res.render('index',{homeurl:'http://'+req.headers.host,hostname:req.headers.host})
   } else {
     var hostname = req.headers.host
     res.write(hostname + ': curl --data-binary @your-file-here.txt http://'+hostname)

@@ -1,3 +1,6 @@
+h2 {
+  margin:0
+}
 div#header {
   background-color:#E3E4FA;
   margin-top:1em; 
@@ -30,18 +33,17 @@ a#home {
   display:inline-block;
   -webkit-animation: spinner 1500ms ease;
 }
-div.usage_1:hover {
+div.usage.basic {
+  background-color:#b9ffd0;
+}
+div.usage.secure{
+  background-color:#b9ffd0;
+}
+div.usage:hover {
   background-color:#b9ffd0;
   -webkit-transition: background-color 500ms;
 }
-div.usage_2:hover {
-  background-color:#b9ffd0;
-  -webkit-transition: background-color 500ms;
-}
-div.usage_1:hover span.usage_1 {
-  -webkit-animation: blip 500ms ease;
-}
-div.usage_2:hover span.usage_2 {
+div.usage:hover span.blip {
   -webkit-animation: blip 500ms ease;
 }
 div.sharelink a {
