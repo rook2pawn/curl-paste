@@ -3,23 +3,17 @@
     <meta content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
     <title>curlpaste.com</title>
     <link rel='stylesheet' type='text/css' href="index.css" />
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div id='header'>
   <div id='headerbar'>
     <a id='home' href='#homeurl#'>#homeurl#</a>#1 portable dev paste site
     <ul>
-      <li><a href='#'>Developer FAQ</a></li>
+      <li><a href='/faq.html'>Developer FAQ</a></li>
       <li><a href='http://github.com/rook2pawn/curl-paste'>Github</a></li>
     </ul>
   </div> 
-</div>
-<div id='explanation'>
-<h1>What is Curlpaste?</h1>
-<div>Curlpaste lets you upload a bit of text with or without the aid of a web browser, and returns to you a URL that you can share to retrieve that bit of text. You also have the option to make the content that you share "view-once" where after it is viewed one time, it is deleted, or after one minute, it is deleted regardless if it was viewed or not. Additionally, you have the option to rehost the entire service yourself, to run the service in HTTP or HTTPS mode, and inspect the very small code base. This is decentralized, re-hostable, portable, user-free, easily-code-inspectable way to securely communicate or just use it as a way to transfer config files to and from different devices.
-<br>
-Curlpaste.com is my site that hosts a running instance of an open source service that I authored, <a href='http://github.com/rook2pawn/curl-paste'>curl-paste</a>.
 </div>
 <div id='wrapper'>
 <div id='main'>

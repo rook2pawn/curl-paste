@@ -10,7 +10,7 @@
   <div id='headerbar'>
     <a id='home' href='#homeurl#'>#homeurl#</a>#1 dev paste site
     <ul>
-      <li><a href='#'>Developer FAQ</a></li>
+      <li><a href='/faq.html'>Developer FAQ</a></li>
       <li><a href='http://github.com/rook2pawn/curl-paste'>Github</a></li>
     </ul>
   </div> 
