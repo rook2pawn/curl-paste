@@ -28,3 +28,14 @@ Upload document, returns {id}. After one GET of {id}, document is deleted.
 
 #### POST /once?expires={seconds}
 Upload document, returns {id}. After one GET of {id}, document is deleted. Document is also deleted after {seconds}.
+
+
+#Secure with HTTPS
+
+    var server = https.createServer({
+        key:fs.readFileSync('privkey.pem'),
+        cert:fs.readFileSync('fullchain.pem')
+    },app)
+
+
+
