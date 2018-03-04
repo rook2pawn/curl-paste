@@ -28,12 +28,12 @@
     "level": "",
     "level-sublevel": "^6.5.2",
     "optimist": "^0.6.1",
-    "router-middleware": "",
+    "router-middleware": "^3.0.2",
     "through": "^2.3.8",
     "through2": "^2.0.0"
   },
   "devDependencies": {
     "supertest": "",
-    "tape": ""
+    "tape": "^4.9.0"
   }
 }

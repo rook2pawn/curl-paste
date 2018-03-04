@@ -6,12 +6,39 @@ var lib = require('../lib/index')
 
 app.get('/id/:id',lib.getFile,lib.deleteIfViewOnce)
 app.get('/web/:id',lib.getFileWeb,lib.deleteIfViewOnce)
-app.post('/',lib.writeFile)
+app.post('/', lib.writeFile)
 app.post('/once',lib.writeFileViewOnce)
 
 
 var id = ''
 var server = request(app)
+
+test('post MAX test', function (t) {
+  var largeText = "c".repeat(51*1024).concat('a')
+  t.plan(1)
+  server
+    .post('/')
+    .set('Content-Type', 'text/plain')
+    .send(largeText)
+    .end(function(err, res){
+      t.equal(err.message, "socket hang up");
+    });
+})
+
+test('post MAX test', function (t) {
+  var largeText = "c".repeat(351*1024)
+  t.plan(1)
+  server
+    .post('/')
+    .set('Content-Length', 351*1024)
+    .set('Content-Type', 'text/plain')
+    .send(largeText)
+    .end(function(err, res){
+      t.equal(err.message, "read ECONNRESET");
+    });
+})
+
+
 
 test('post test', function (t) {
   t.plan(1)
