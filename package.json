@@ -4,7 +4,9 @@
   "description": "curl-paste.us",
   "main": "index.js",
   "scripts": {
-    "test": "tape ./test/test.js"
+    "test": "tape ./test/test.js",
+    "start-https": "node server.js -s",
+    "start-http": "node server.js"
   },
   "repository": {
     "type": "git",

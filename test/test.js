@@ -20,7 +20,7 @@ test('post MAX test', function (t) {
     .post('/')
     .set('Content-Type', 'text/plain')
     .send(largeText)
-    .end(function(err, res){
+    .end(function(err, res) {
       t.equal(err.message, "socket hang up");
     });
 })

@@ -1,8 +1,15 @@
 var argv = require('optimist')
     .usage('curlpaste\nUsage : $0')
-    .demand('p')
     .describe('p','port')
+    .describe('s', 'use https')
+    .boolean('s')
     .argv;
+
+const config = require("./config.js");
+
+if (!argv.p) {
+  argv.p = config.port;
+}
 
 var router = require('router-middleware')
 var app = router()
@@ -11,15 +18,21 @@ var path = require('path')
 var ecstatic = require('ecstatic')({root:path.join(__dirname,'web')})
 var fs = require('fs')
 
-var https = require('https')
-var server = https.createServer({key:fs.readFileSync('privkey.pem'),cert:fs.readFileSync('fullchain.pem')},app)
-//var http = require('http')
-//var server = http.createServer(app)
-server.listen(argv.p)
+var server;
+if (argv.s) {
+  var https = require('https')
+  server = https.createServer({key:fs.readFileSync('privkey.pem'),cert:fs.readFileSync('fullchain.pem')},app)
+} else {
+  var http = require('http')
+  server = http.createServer(app)
+}
+server.listen(argv.p, () => {
+  console.log("curl-paste server started on " + argv.p)
+})
 
 app.fileserver(ecstatic)
 app.get('/',function(req,res,next) {
-  var protocol = 'http'    
+  var protocol = 'http'
   if (req.connection.encrypted)
     protocol = 'https'
   if (req.headers['user-agent'] && (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null)) {
@@ -27,7 +40,7 @@ app.get('/',function(req,res,next) {
   } else {
     var hostname = req.headers.host
     res.write(hostname + ': curl --data-binary @your-file-here.txt '+protocol+'://'+hostname)
-    res.end('\n') 
+    res.end('\n')
   }
 })
 app.get('/id/:id',lib.getFile,lib.deleteIfViewOnce)
