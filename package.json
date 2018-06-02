@@ -24,6 +24,7 @@
   "homepage": "https://github.com/rook2pawn/curl-paste",
   "dependencies": {
     "concat-stream": "",
+    "ddos": "^0.1.29",
     "ecstatic": "",
     "ent": "",
     "level": "",

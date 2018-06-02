@@ -12,7 +12,10 @@ if (!argv.p) {
 }
 
 var router = require('router-middleware')
+var Ddos = require('ddos')
+var ddos = new Ddos({burst:10, limit:15})
 var app = router()
+app.use(ddos)
 var lib = require('./lib/index')
 var path = require('path')
 var ecstatic = require('ecstatic')({root:path.join(__dirname,'web')})
