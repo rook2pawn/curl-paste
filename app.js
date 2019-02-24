@@ -98,9 +98,20 @@ class WebContent extends Nanocomponent {
       };
       xhr.send(null);
     }
+    const rawlink = state.header.origin + '/id/'+state.query.id
+    const weblink = state.header.origin + '/web/'+state.query.id
+
     return html`
     <div class='main'>
-    ${this.content}
+
+    <div class='linkbox'>
+      <div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href='${rawlink}'>${rawlink}</a></div>
+      <div class='sharelink_curlpaste'>Web URL: <a id='weblink' href='${weblink}'>${weblink}</a></div>
+    </div>
+
+    <div class='content'>
+      ${this.content}
+    </div>
     </div>
     `
   }

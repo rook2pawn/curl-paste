@@ -6,7 +6,7 @@ const css = 0;
 const raw = require('nanohtml/raw')
 const path = require('path')
 
-;((require('sheetify/insert')("body {\n  padding:0;\n  margin:0;\n  background-color:#e4f5fc;\n  font-family: 'Ubuntu Mono', sans-serif;\n}\n\ndiv.header {\n  width:80%;\n  margin:0 auto;\n  background-color: #E3E4FA;\n  margin-top: 1em;\n  margin-bottom: 1em;  \n}\n\ndiv.main {\n  width:80%;\n  margin:0 auto;\n\tdisplay:flex;\n  flex-direction: column;\n  background-color:#F9F9EF;\n  padding:1em;\n  box-shadow: #666 3px 3px 15px  \n}\n\ntextarea {\n  width: 95%;\n}") || true) && "_4d8a9c6b")
+;((require('sheetify/insert')("body {\n  padding:0;\n  margin:0;\n  background-color:#e4f5fc;\n  font-family: 'Ubuntu Mono', sans-serif;\n}\n\ndiv.header {\n  width:80%;\n  margin:0 auto;\n  background-color: #E3E4FA;\n  margin-top: 1em;\n  margin-bottom: 1em;  \n}\n\ndiv.main {\n  width:80%;\n  margin:0 auto;\n\tdisplay:flex;\n  flex-direction: column;\n  background-color:#F9F9EF;\n  padding:1em;\n  box-shadow: #666 3px 3px 15px  \n}\n\ndiv.linkbox {\n  padding:1em;\n}\n\ndiv.content {\n  padding:1em;\n  background-color:#f4fbb7;\n  border:thin dotted #ccc;\n}\n\ntextarea {\n  width: 95%;\n}") || true) && "_c0b1d5a9")
 
 class Header extends Nanocomponent {
   constructor () {
@@ -99,9 +99,20 @@ class WebContent extends Nanocomponent {
       };
       xhr.send(null);
     }
+    const rawlink = state.header.origin + '/id/'+state.query.id
+    const weblink = state.header.origin + '/web/'+state.query.id
+
     return html`
     <div class='main'>
-    ${this.content}
+
+    <div class='linkbox'>
+      <div class='sharelink_curlpaste'>Raw URL: <a id='rawlink' href='${rawlink}'>${rawlink}</a></div>
+      <div class='sharelink_curlpaste'>Web URL: <a id='weblink' href='${weblink}'>${weblink}</a></div>
+    </div>
+
+    <div class='content'>
+      ${this.content}
+    </div>
     </div>
     `
   }

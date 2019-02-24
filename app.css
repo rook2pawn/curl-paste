@@ -23,6 +23,16 @@ div.main {
   box-shadow: #666 3px 3px 15px  
 }
 
+div.linkbox {
+  padding:1em;
+}
+
+div.content {
+  padding:1em;
+  background-color:#f4fbb7;
+  border:thin dotted #ccc;
+}
+
 textarea {
   width: 95%;
 }
