@@ -1,0 +1,21 @@
+body {
+  padding:0;
+  margin:0;
+  background-color:#e4f5fc;
+  font-family: 'Ubuntu Mono', sans-serif;
+}
+
+div.header {
+  width:80%;
+  margin:0 auto;
+}
+
+div.main {
+  width:80%;
+  margin:0 auto;
+	display:flex;
+  flex-direction: column;
+  background-color:#F9F9EF;
+  padding:1em;
+  box-shadow: #666 3px 3px 15px  
+}
