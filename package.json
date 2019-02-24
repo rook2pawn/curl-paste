@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js -p 8080",
     "build": "browserify -g sheetify app.js -o static/bundle.js",
-    "browser": "npm run build && npm run start"
+    "browser": "npm run build && npm run start",
+    "test": "tape test/*"
   },
   "dependencies": {
     "browserify": "",
@@ -17,9 +18,14 @@
     "level-sublevel": "^6.6.5",
     "nanocomponent": "",
     "router-middleware": "",
-    "sheetify": ""
+    "sheetify": "",
+    "through": "^2.3.8"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "supertest": "^3.4.2",
+    "tape": "^4.10.1"
+  }
 }
