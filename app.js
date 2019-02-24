@@ -65,9 +65,42 @@ class Input extends Nanocomponent {
             <textarea name="text" value="" rows="10"></textarea>
         </form>
     </div>
+    </div>
+    `
+  }
+}
 
+class WebContent extends Nanocomponent {
+  constructor () {
+    super();
+    this.content = undefined;
+  }
 
+  createElement (state, emitter) {
+    const id = state.query.id;
 
+    if (this.content === undefined) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", `/id/${id}`, true);
+      xhr.onload = (e) => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            this.content = xhr.responseText;
+            this.rerender();
+          } else {
+            console.error(xhr.statusText);
+          }
+        }
+      };
+      xhr.onerror = function (e) {
+        console.error(xhr.statusText);
+      };
+      xhr.send(null);
+    }
+    return html`
+    <div class='main'>
+    ${this.content}
     </div>
     `
   }
@@ -77,6 +110,7 @@ var app = choo()
 var header = new Header;
 var input = new Input;
 var park = new Park;
+var web = new WebContent; 
 
 function mainView (state, emit) {
   return html`<body>
@@ -92,6 +126,13 @@ function parkView (state, emit) {
   </body>`
  }
 
+function webView (state, emit) {
+  return html`<body>
+  ${header.render(state)}
+  ${web.render(state)}  
+  </body>`
+ }
+
 
 app.use((state, emitter) => {
   state.header = {};
@@ -101,6 +142,9 @@ app.use((state, emitter) => {
 
 app.route('/', mainView)
 app.route('/park', parkView)
+app.route('/web', webView)
+
+
 app.mount('body')
 
 document.title = window.location.host;

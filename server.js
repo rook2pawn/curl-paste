@@ -47,7 +47,7 @@ app.get('/',function(req,res,next) {
 const lib = require('./lib/index')
 
 app.get('/id/:id',lib.getFile,lib.deleteIfViewOnce)
-app.get('/web/:id',lib.getFileWeb,lib.deleteIfViewOnce)
+app.get('/web/:id',lib.showWeb)
 app.post('/', ddos, lib.writeFile)
 app.post('/web',lib.writeFileWeb)
 app.post('/once',lib.writeFileViewOnce)
