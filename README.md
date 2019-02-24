@@ -42,9 +42,9 @@ Simply place `privkey.pem` and `fullchain.pem` in the root directory.
 Run the secure HTTPS server with `node server.js -p 443 -s` where `-s` signifies it will read the `key` and the `cert`.
 
 ```js
-    var server = https.createServer({
-        key:fs.readFileSync('privkey.pem'),
-        cert:fs.readFileSync('fullchain.pem')
-    },app)
+  var server = https.createServer({
+      key:fs.readFileSync('privkey.pem'),
+      cert:fs.readFileSync('fullchain.pem')
+  },app)
 ```
 
