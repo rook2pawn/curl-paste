@@ -102,3 +102,5 @@ app.use((state, emitter) => {
 app.route('/', mainView)
 app.route('/park', parkView)
 app.mount('body')
+
+document.title = window.location.host;
