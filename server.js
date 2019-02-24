@@ -33,7 +33,7 @@ server.listen(argv.p, () => {
 
 app.fileserver(ecstatic)
 app.get('/',function(req,res,next) {
-  const protocol = 'http'
+  let protocol = 'http'
   if (req.connection.encrypted)
     protocol = 'https'
   if (req.headers['user-agent'] && (req.headers['user-agent'].match(/mozilla|chrome|webkit/i) !== null)) {
