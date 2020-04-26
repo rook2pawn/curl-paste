@@ -14,7 +14,7 @@
     "choo": "",
     "ddos": "^0.2.1",
     "http-server": "",
-    "level": "^4.0.0",
+    "level": "",
     "level-sublevel": "^6.6.5",
     "nanocomponent": "",
     "router-middleware": "",
